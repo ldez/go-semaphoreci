@@ -34,6 +34,67 @@ type Organization struct {
 	UpdatedAt   *time.Time `json:"updated_at"`
 }
 
+// ConfigFile An API configuration file representation
+type ConfigFile struct {
+	ID        string     `json:"id"`
+	Path      string     `json:"path"`
+	URL       string     `json:"url"`
+	Content   string     `json:"content"`
+	Shared    bool       `json:"shared"`
+	Encrypted bool       `json:"encrypted"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+}
+
+// EnvVar An API environment variables representation
+type EnvVar struct {
+	ID        string     `json:"id"`
+	Name      string     `json:"name"`
+	URL       string     `json:"url"`
+	Content   string     `json:"content"`
+	Shared    bool       `json:"shared"`
+	Encrypted bool       `json:"encrypted"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+}
+
+// Secret An API secret representation
+type Secret struct {
+	ID             string     `json:"id"`
+	Name           string     `json:"name"`
+	Description    string     `json:"description"`
+	URL            string     `json:"url"`
+	ProjectsURL    string     `json:"projects_url"`
+	TeamsURL       string     `json:"teams_url"`
+	EnvVarsURL     string     `json:"env_vars_url"`
+	ConfigFilesURL string     `json:"config_files_url"`
+	CreatedAt      *time.Time `json:"created_at"`
+	UpdatedAt      *time.Time `json:"updated_at"`
+}
+
+// Team An API team representation
+type Team struct {
+	ID          string     `json:"id"`
+	Name        string     `json:"name"`
+	Description string     `json:"description"`
+	URL         string     `json:"url"`
+	Permission  string     `json:"permission"`
+	UsersURL    string     `json:"users_url"`
+	ProjectsURL string     `json:"projects_url"`
+	SecretsURL  string     `json:"secrets_url"`
+	CreatedAt   *time.Time `json:"created_at"`
+	UpdatedAt   *time.Time `json:"updated_at"`
+}
+
+// User An API user representation
+type User struct {
+	UID       string     `json:"uid"`
+	Username  string     `json:"username"`
+	Name      string     `json:"name"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+}
+
 // ErrorResponse An API error representation
 type ErrorResponse struct {
 	Response         *http.Response    `json:"-"`

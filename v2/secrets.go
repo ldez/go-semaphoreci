@@ -1,18 +1,79 @@
 package v2
 
+import (
+	"fmt"
+	"net/http"
+)
+
 // http://semaphoreci.com/docs/api-v2-secrets.html
 
-// TODO List secrets in an organization
+// GetSecretsByOrg List secrets in an organization
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-in-an-organization
+func (c Client) GetSecretsByOrg(orgUsername string) ([]Secret, *Response, error) {
+	urlStr := fmt.Sprintf("orgs/%s/secrets", orgUsername)
 
-// TODO List secrets in a team
+	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	v := new([]Secret)
+
+	resp, err := c.Do(req, v)
+
+	return *v, resp, err
+}
+
+// GetSecretsByTeam List secrets in a team
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-in-a-team
+func (c Client) GetSecretsByTeam(teamID string) ([]Secret, *Response, error) {
+	urlStr := fmt.Sprintf("teams/%s/secrets", teamID)
 
-// TODO List secrets attached to a project
+	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	v := new([]Secret)
+
+	resp, err := c.Do(req, v)
+
+	return *v, resp, err
+}
+
+// GetSecretsByProject List secrets attached to a project
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-attached-to-a-project
+func (c Client) GetSecretsByProject(projectID string) ([]Secret, *Response, error) {
+	urlStr := fmt.Sprintf("projects/%s/secrets", projectID)
 
-// TODO Get a secret
+	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	v := new([]Secret)
+
+	resp, err := c.Do(req, v)
+
+	return *v, resp, err
+}
+
+// GetSecret Get a secret
 // http://semaphoreci.com/docs/api-v2-secrets.html#get-a-secret
+func (c Client) GetSecret(secretID string) (*Secret, *Response, error) {
+	urlStr := fmt.Sprintf("secrets/%s", secretID)
+
+	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	v := new(Secret)
+
+	resp, err := c.Do(req, v)
+
+	return v, resp, err
+}
 
 // TODO Create secret in an organization
 // http://semaphoreci.com/docs/api-v2-secrets.html#create-secret-in-an-organization
@@ -32,5 +93,5 @@ package v2
 // TODO Remove secret from a team
 // http://semaphoreci.com/docs/api-v2-secrets.html#remove-secret-from-a-team
 
-// TODO Dettach a secret from a project
+// TODO Detach a secret from a project
 // http://semaphoreci.com/docs/api-v2-secrets.html#dettach-a-secret-from-a-project
