@@ -2,7 +2,7 @@
 
 GOFILES := $(shell go list -f '{{range $$index, $$element := .GoFiles}}{{$$.Dir}}/{{$$element}}{{"\n"}}{{end}}' ./... | grep -v '/vendor/')
 
-default: clean checks test
+default: clean check test
 
 test: clean
 	go test -v -cover ./...
@@ -16,8 +16,8 @@ clean:
 build:
 	go build
 
-checks: check-fmt
-	gometalinter --vendor ./...
+check: check-fmt
+	golangci-lint run
 
 check-fmt: SHELL := /bin/bash
 check-fmt:
