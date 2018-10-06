@@ -5,55 +5,56 @@ import (
 	"net/http"
 )
 
-// http://semaphoreci.com/docs/api-v2-projects.html
+// ProjectsService http://semaphoreci.com/docs/api-v2-projects.html
+type ProjectsService service
 
-// GetProjectsByOrg List projects in an organization
+// GetByOrg List projects in an organization
 // http://semaphoreci.com/docs/api-v2-projects.html#list-projects-in-an-organization
-func (c Client) GetProjectsByOrg(orgUsername string) ([]Project, *Response, error) {
+func (c *ProjectsService) GetByOrg(orgUsername string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s/projects", orgUsername)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Project)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }
 
-// GetProjectsByTeam List project added to a team
+// GetByTeam List project added to a team
 // http://semaphoreci.com/docs/api-v2-projects.html#list-project-added-to-a-team
-func (c Client) GetProjectsByTeam(teamID string) ([]Project, *Response, error) {
+func (c *ProjectsService) GetByTeam(teamID string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("teams/%s/projects", teamID)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Project)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }
 
-// GetProjectsBySecret List projects for a secret
+// GetBySecret List projects for a secret
 // http://semaphoreci.com/docs/api-v2-projects.html#list-projects-for-a-secret
-func (c Client) GetProjectsBySecret(secretID string) ([]Project, *Response, error) {
+func (c *ProjectsService) GetBySecret(secretID string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s/projects", secretID)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Project)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }

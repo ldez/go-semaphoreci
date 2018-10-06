@@ -95,6 +95,10 @@ type User struct {
 	UpdatedAt *time.Time `json:"updated_at"`
 }
 
+type service struct {
+	client *Client
+}
+
 // ErrorResponse An API error representation
 type ErrorResponse struct {
 	Response         *http.Response    `json:"-"`

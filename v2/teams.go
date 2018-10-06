@@ -5,72 +5,73 @@ import (
 	"net/http"
 )
 
-// http://semaphoreci.com/docs/api-v2-teams.html
+// TeamsService http://semaphoreci.com/docs/api-v2-teams.html
+type TeamsService service
 
-// GetTeamsByOrg List teams in an organization
+// GetByOrg List teams in an organization
 // http://semaphoreci.com/docs/api-v2-teams.html#list-teams-in-an-organization
-func (c Client) GetTeamsByOrg(orgUsername string) ([]Team, *Response, error) {
+func (c *TeamsService) GetByOrg(orgUsername string) ([]Team, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s/teams", orgUsername)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Team)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }
 
-// GetTeamsByProject List all teams connected to project
+// GetByProject List all teams connected to project
 // http://semaphoreci.com/docs/api-v2-teams.html#list-all-teams-connected-to-project
-func (c Client) GetTeamsByProject(projectID string) ([]Team, *Response, error) {
+func (c *TeamsService) GetByProject(projectID string) ([]Team, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/teams", projectID)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Team)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }
 
-// GetTeamsBySecret List teams for a secret
+// GetBySecret List teams for a secret
 // http://semaphoreci.com/docs/api-v2-teams.html#list-teams-for-a-secret
-func (c Client) GetTeamsBySecret(secretID string) ([]Team, *Response, error) {
+func (c *TeamsService) GetBySecret(secretID string) ([]Team, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s/teams", secretID)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new([]Team)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return *v, resp, err
 }
 
-// GetTeam Get a team
+// Get Get a team
 // http://semaphoreci.com/docs/api-v2-teams.html#get-a-team
-func (c Client) GetTeam(teamID string) (*Team, *Response, error) {
+func (c *TeamsService) Get(teamID string) (*Team, *Response, error) {
 	urlStr := fmt.Sprintf("teams/%s", teamID)
 
-	req, err := c.NewRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new(Team)
 
-	resp, err := c.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return v, resp, err
 }

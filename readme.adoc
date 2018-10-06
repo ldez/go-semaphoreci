@@ -53,7 +53,7 @@ func main() {
 
 	client := v2.NewClient(authToken.Client())
 
-	projects, resp, err := client.GetProjectsByOrg("your-organization")
+	projects, resp, err := client.Projects.GetByOrg("your-organization")
 	if err != nil {
 		log.Fatal(err)
 	}

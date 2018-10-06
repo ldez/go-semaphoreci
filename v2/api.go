@@ -27,6 +27,16 @@ type Client struct {
 	BaseURL   *url.URL
 	UserAgent string
 	client    *http.Client
+
+	common service // Reuse a single struct instead of allocating one for each service on the heap.
+
+	ConfigFiles   *ConfigFilesService
+	EnvVars       *EnvVarsService
+	Organizations *OrganizationsService
+	Projects      *ProjectsService
+	Secrets       *SecretsService
+	Teams         *TeamsService
+	Users         *UsersService
 }
 
 // NewClient creates a new API v2 client
@@ -37,10 +47,18 @@ func NewClient(httpClient *http.Client) *Client {
 
 	baseURL, _ := url.Parse(defaultBaseURL)
 
-	return &Client{
-		BaseURL: baseURL,
-		client:  httpClient,
-	}
+	c := &Client{BaseURL: baseURL, client: httpClient}
+
+	c.common.client = c
+	c.ConfigFiles = (*ConfigFilesService)(&c.common)
+	c.EnvVars = (*EnvVarsService)(&c.common)
+	c.Organizations = (*OrganizationsService)(&c.common)
+	c.Projects = (*ProjectsService)(&c.common)
+	c.Secrets = (*SecretsService)(&c.common)
+	c.Teams = (*TeamsService)(&c.common)
+	c.Users = (*UsersService)(&c.common)
+
+	return c
 }
 
 // NewRequest creates a request
