@@ -2,14 +2,46 @@
 
 
 [[projects]]
+  digest = "1:f9f45f75f332e03fc7e9fe9188ea4e1ce4d14779ef34fa1b023da67518e36327"
+  name = "github.com/google/go-cmp"
+  packages = [
+    "cmp",
+    "cmp/internal/diff",
+    "cmp/internal/function",
+    "cmp/internal/value",
+  ]
+  pruneopts = ""
+  revision = "3af367b6b30c263d47e8895973edcca9a49cf029"
+  version = "v0.2.0"
+
+[[projects]]
+  digest = "1:7365acd48986e205ccb8652cc746f09c8b7876030d53710ea6ef7d0bd0dcd7ca"
   name = "github.com/pkg/errors"
   packages = ["."]
+  pruneopts = ""
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
+
+[[projects]]
+  digest = "1:f76bcc56e35f5789163606e2edc2dd4d1842801cc6f6e08c9bcbf8e2d26f0036"
+  name = "gotest.tools"
+  packages = [
+    "assert",
+    "assert/cmp",
+    "internal/difflib",
+    "internal/format",
+    "internal/source",
+  ]
+  pruneopts = ""
+  revision = "b6e20af1ed078cd01a6413b734051a292450b4cb"
+  version = "v2.1.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "be52a27ec302b8a6c01d9cceda92c94ebffda1207e5c8ec8bee6579b794eaa8e"
+  input-imports = [
+    "github.com/pkg/errors",
+    "gotest.tools/assert",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
