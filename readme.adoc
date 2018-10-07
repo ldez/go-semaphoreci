@@ -28,7 +28,7 @@ func main() {
 	    Token: "your-token",
 	}
 
-    client := v1.NewClient(transport.Client())
+	client := v1.NewClient(transport.Client())
 
 	projects, _, err := client.Projects.Get()
 	if err != nil {
