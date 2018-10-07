@@ -3,7 +3,9 @@
 go-semaphoreci is a Go client library for accessing the [Semaphore CI](https://semaphoreci.com/) API.
 
 * [x] [API v1](https://semaphoreci.com/docs/branches-and-builds-api.html)
-* [~] [API v2](http://semaphoreci.com/docs/api-v2-overview.html)
+* [API v2](http://semaphoreci.com/docs/api-v2-overview.html)
+  * [x] read operations
+  * [ ] write operations
 
 ## Examples
 
@@ -17,8 +19,11 @@ import (
 )
 
 func main() {
-	authToken := "your-token"
-	client := v1.NewClient(nil, authToken)
+	transport := v1.TokenTransport{
+	    Token: "your-token",
+	}
+
+    client := v1.NewClient(transport.Client())
 
 	projects, _, err := client.Projects.Get()
 	if err != nil {
