@@ -10,8 +10,6 @@ import (
 	"net/url"
 	"strconv"
 	"time"
-
-	"github.com/pkg/errors"
 )
 
 const defaultBaseURL = "https://api.semaphoreci.com/v2/"
@@ -92,24 +90,26 @@ func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 
 	err = checkResponse(resp)
 	if err != nil {
-		return response, errors.Cause(err)
+		return response, err
 	}
 
-	if v != nil {
-		raw, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return response, &ErrorResponse{
-				Response: resp,
-				Message:  fmt.Sprintf("faild to read body: %v", err),
-			}
-		}
+	if v == nil {
+		return response, nil
+	}
 
-		err = json.Unmarshal(raw, v)
-		if err != nil {
-			return response, &ErrorResponse{
-				Response: resp,
-				Message:  fmt.Sprintf("unmarshaling error: %v: %s", err, string(raw)),
-			}
+	raw, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return response, &ErrorResponse{
+			Response: resp,
+			Message:  fmt.Sprintf("failed to read body: %v", err),
+		}
+	}
+
+	err = json.Unmarshal(raw, v)
+	if err != nil {
+		return response, &ErrorResponse{
+			Response: resp,
+			Message:  fmt.Sprintf("unmarshaling error: %v: %s", err, string(raw)),
 		}
 	}
 

@@ -176,7 +176,6 @@ func (r *Response) populatePageValues() {
 				case `rel="last"`:
 					r.LastPage, _ = strconv.Atoi(page)
 				}
-
 			}
 		}
 	}
