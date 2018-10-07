@@ -22,8 +22,6 @@ type Client struct {
 	UserAgent string
 	client    *http.Client
 
-	AuthToken string
-
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	Branch   *BranchesService
@@ -33,14 +31,14 @@ type Client struct {
 }
 
 // NewClient create a new API v1 client
-func NewClient(httpClient *http.Client, authToken string) *Client {
+func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
 	}
 
 	baseURL, _ := url.Parse(defaultBaseURL)
 
-	c := &Client{BaseURL: baseURL, AuthToken: authToken, client: httpClient}
+	c := &Client{BaseURL: baseURL, client: httpClient}
 
 	c.common.client = c
 	c.Branch = (*BranchesService)(&c.common)
@@ -53,7 +51,7 @@ func NewClient(httpClient *http.Client, authToken string) *Client {
 
 // NewRequest creates a request
 func (c *Client) NewRequest(method, urlStr string, body io.Reader) (*http.Request, error) {
-	u, err := c.BaseURL.Parse(fmt.Sprintf("%s?auth_token=%s", urlStr, c.AuthToken))
+	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
 		return nil, err
 	}

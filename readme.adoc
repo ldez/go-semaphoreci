@@ -22,8 +22,11 @@ import (
 )
 
 func main() {
-	authToken := "your-token"
-	client := v1.NewClient(nil, authToken)
+	transport := v1.TokenTransport{
+	    Token: "your-token",
+	}
+
+    client := v1.NewClient(transport.Client())
 
 	projects, _, err := client.Projects.Get()
 	if err != nil {
