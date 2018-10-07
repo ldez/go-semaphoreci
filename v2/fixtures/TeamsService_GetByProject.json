@@ -1,0 +1,14 @@
+[
+  {
+    "name": "developers",
+    "permission": "edit",
+    "description": "Developers team",
+    "id": "86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5",
+    "url": "https://api.semaphoreci.com/v2/teams/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5",
+    "users_url": "https://api.semaphoreci.com/v2/teams/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5/users",
+    "projects_url": "https://api.semaphoreci.com/v2/teams/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5/projects",
+    "secrets_url": "https://api.semaphoreci.com/v2/teams/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5/secrets",
+    "updated_at": "2017-06-10T16:59:51+02:00",
+    "created_at": "2017-06-10T16:59:51+02:00"
+  }
+]

@@ -25,17 +25,17 @@ func (c *OrganizationsService) GetYours() ([]Organization, *Response, error) {
 
 // Get Get an organization
 // http://semaphoreci.com/docs/api-v2-orgs.html#get-an-organization
-func (c *OrganizationsService) Get(username string) (*Organization, error) {
-	urlStr := fmt.Sprintf("orgs/%s/projects", username)
+func (c *OrganizationsService) Get(username string) (*Organization, *Response, error) {
+	urlStr := fmt.Sprintf("orgs/%s", username)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	v := new(Organization)
 
-	_, err = c.client.Do(req, v)
+	resp, err := c.client.Do(req, v)
 
-	return v, err
+	return v, resp, err
 }

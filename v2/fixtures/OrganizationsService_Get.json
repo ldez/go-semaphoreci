@@ -1,0 +1,12 @@
+{
+  "id": "86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5",
+  "name": "Rendered Text",
+  "url": "https://api.semaphoreci.com/v2/orgs/renderedtext",
+  "projects_url": "https://api.semaphoreci.com/v2/orgs/renderedtext/projects",
+  "secrets_url": "https://api.semaphoreci.com/v2/orgs/renderedtext/secrets",
+  "users_url": "https://api.semaphoreci.com/v2/orgs/renderedtext/users",
+  "teams_url": "https://api.semaphoreci.com/v2/orgs/renderedtext/teams",
+  "username": "renderedtext",
+  "created_at": "2017-06-10T16:59:51+02:00",
+  "updated_at": "2017-06-10T16:59:51+02:00"
+}

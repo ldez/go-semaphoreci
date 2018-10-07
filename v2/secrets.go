@@ -59,9 +59,9 @@ func (c *SecretsService) GetByProject(projectID string) ([]Secret, *Response, er
 	return *v, resp, err
 }
 
-// GetSecret Get a secret
+// Get Get a secret
 // http://semaphoreci.com/docs/api-v2-secrets.html#get-a-secret
-func (c *SecretsService) GetSecret(secretID string) (*Secret, *Response, error) {
+func (c *SecretsService) Get(secretID string) (*Secret, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s", secretID)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)

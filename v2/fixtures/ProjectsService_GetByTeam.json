@@ -1,0 +1,11 @@
+[
+  {
+    "id": "86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5",
+    "name": "elixir-lang",
+    "html_url": "https://semaphoreci.com/renderedtext/elixir-lang",
+    "users_url": "https://api.semaphoreci.com/v2/projects/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5/users",
+    "secrets_url": "https://api.semaphoreci.com/v2/projects/86e78b7e-2f9c-45a7-9939-ec2c9f6f64b5/secrets",
+    "updated_at": "2017-06-10T16:59:51+02:00",
+    "created_at": "2017-06-10T16:59:51+02:00"
+  }
+]
