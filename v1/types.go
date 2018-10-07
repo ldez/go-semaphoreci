@@ -183,6 +183,10 @@ type Pagination struct {
 	PreviousPage int  `json:"previous_page,omitempty"`
 }
 
+type service struct {
+	client *Client
+}
+
 // Response API response
 type Response struct {
 	*http.Response
@@ -200,7 +204,7 @@ func (r *Response) populatePageValues() error {
 
 // ErrorResponse API error response
 type ErrorResponse struct {
-	Response *http.Response // HTTP response that caused this error
+	Response *http.Response `json:"-"`     // HTTP response that caused this error
 	Message  string         `json:"error"` // error message
 }
 

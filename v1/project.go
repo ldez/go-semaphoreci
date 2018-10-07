@@ -4,18 +4,19 @@ import (
 	"net/http"
 )
 
-// https://semaphoreci.com/docs/projects-api.html
+// ProjectsService https://semaphoreci.com/docs/projects-api.html
+type ProjectsService service
 
-// GetProjects https://semaphoreci.com/docs/projects-api.html#
-func (c Client) GetProjects() ([]Project, error) {
-	req, err := c.newRequest(http.MethodGet, "projects", nil)
+// Get https://semaphoreci.com/docs/projects-api.html#
+func (c *ProjectsService) Get() ([]Project, *Response, error) {
+	req, err := c.client.NewRequest(http.MethodGet, "projects", nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	v := new([]Project)
 
-	_, err = do(req, v)
+	resp, err := c.client.Do(req, v)
 
-	return *v, err
+	return *v, resp, err
 }

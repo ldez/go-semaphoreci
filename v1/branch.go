@@ -5,52 +5,53 @@ import (
 	"net/http"
 )
 
-// https://semaphoreci.com/docs/branches-and-builds-api.html
+// BranchesService https://semaphoreci.com/docs/branches-and-builds-api.html
+type BranchesService service
 
-// GetBranches https://semaphoreci.com/docs/branches-and-builds-api.html#project_branches
-func (c Client) GetBranches(projectHashID string) ([]Branch, error) {
+// GetByProject https://semaphoreci.com/docs/branches-and-builds-api.html#project_branches
+func (c *BranchesService) GetByProject(projectHashID string) ([]Branch, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/branches", projectHashID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	v := new([]Branch)
 
-	_, err = do(req, v)
+	resp, err := c.client.Do(req, v)
 
-	return *v, err
+	return *v, resp, err
 }
 
-// GetBranchStatus https://semaphoreci.com/docs/branches-and-builds-api.html#branch_status
-func (c Client) GetBranchStatus(projectHashID string, branchID int) (*BranchStatus, error) {
+// GetStatus https://semaphoreci.com/docs/branches-and-builds-api.html#branch_status
+func (c *BranchesService) GetStatus(projectHashID string, branchID int) (*BranchStatus, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v/status", projectHashID, branchID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	v := new(BranchStatus)
 
-	_, err = do(req, v)
+	_, err = c.client.Do(req, v)
 
 	return v, err
 }
 
-// GetBranchHistory https://semaphoreci.com/docs/branches-and-builds-api.html#branch_history
-func (c Client) GetBranchHistory(projectHashID string, branchID int, opts *BranchHistoryOptions) (*BranchHistory, *Response, error) {
+// GetHistory https://semaphoreci.com/docs/branches-and-builds-api.html#branch_history
+func (c *BranchesService) GetHistory(projectHashID string, branchID int, opts *BranchHistoryOptions) (*BranchHistory, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v", projectHashID, branchID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new(BranchHistory)
 
-	resp, err := do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return v, resp, err
 }

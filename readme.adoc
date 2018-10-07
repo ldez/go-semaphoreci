@@ -23,9 +23,9 @@ import (
 
 func main() {
 	authToken := "your-token"
-	client := v1.NewClient(authToken)
+	client := v1.NewClient(nil, authToken)
 
-	projects, err := client.GetProjects()
+	projects, _, err := client.Projects.Get()
 	if err != nil {
 		log.Fatal(err)
 	}

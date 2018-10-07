@@ -5,50 +5,53 @@ import (
 	"net/http"
 )
 
-// GetServers https://semaphoreci.com/docs/servers-and-deploys-api.html#project_servers
-func (c Client) GetServers(projectHashID string) ([]Server, error) {
+// ServersService https://semaphoreci.com/docs/servers-and-deploys-api.html
+type ServersService service
+
+// GetByProject https://semaphoreci.com/docs/servers-and-deploys-api.html#project_servers
+func (c *ServersService) GetByProject(projectHashID string) ([]Server, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/server", projectHashID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	v := new([]Server)
 
-	_, err = do(req, v)
+	resp, err := c.client.Do(req, v)
 
-	return *v, err
+	return *v, resp, err
 }
 
-// GetServerStatus https://semaphoreci.com/docs/servers-and-deploys-api.html#server_status
-func (c Client) GetServerStatus(projectHashID string, serverID int) (*ServerStatus, error) {
+// GetStatus https://semaphoreci.com/docs/servers-and-deploys-api.html#server_status
+func (c *ServersService) GetStatus(projectHashID string, serverID int) (*ServerStatus, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v/status", projectHashID, serverID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	v := new(ServerStatus)
 
-	_, err = do(req, v)
+	_, err = c.client.Do(req, v)
 
 	return v, err
 }
 
-// GetServerHistory https://semaphoreci.com/docs/servers-and-deploys-api.html#server_history
-func (c Client) GetServerHistory(projectHashID string, serverID int) (*ServerDeploy, *Response, error) {
+// GetHistory https://semaphoreci.com/docs/servers-and-deploys-api.html#server_history
+func (c *ServersService) GetHistory(projectHashID string, serverID int) (*ServerDeploy, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v", projectHashID, serverID)
 
-	req, err := c.newRequest(http.MethodGet, urlStr, nil)
+	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
 	v := new(ServerDeploy)
 
-	resp, err := do(req, v)
+	resp, err := c.client.Do(req, v)
 
 	return v, resp, err
 }

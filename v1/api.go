@@ -7,38 +7,67 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 
 	"github.com/pkg/errors"
 )
 
 const (
-	apiURL = "https://semaphoreci.com/api/v1"
+	defaultBaseURL = "https://semaphoreci.com/api/v1/"
 )
 
 // Client API v1 client
 type Client struct {
-	URLApi    string
+	BaseURL   *url.URL
+	UserAgent string
+	client    *http.Client
+
 	AuthToken string
+
+	common service // Reuse a single struct instead of allocating one for each service on the heap.
+
+	Branch   *BranchesService
+	Builds   *BuildsService
+	Projects *ProjectsService
+	Servers  *ServersService
 }
 
 // NewClient create a new API v1 client
-func NewClient(authToken string) *Client {
-	return &Client{
-		URLApi:    apiURL,
-		AuthToken: authToken,
+func NewClient(httpClient *http.Client, authToken string) *Client {
+	if httpClient == nil {
+		httpClient = http.DefaultClient
 	}
+
+	baseURL, _ := url.Parse(defaultBaseURL)
+
+	c := &Client{BaseURL: baseURL, AuthToken: authToken, client: httpClient}
+
+	c.common.client = c
+	c.Branch = (*BranchesService)(&c.common)
+	c.Builds = (*BuildsService)(&c.common)
+	c.Projects = (*ProjectsService)(&c.common)
+	c.Servers = (*ServersService)(&c.common)
+
+	return c
 }
 
-func (c Client) newRequest(method, urlStr string, body io.Reader) (*http.Request, error) {
-	u := fmt.Sprintf("%s/%s?auth_token=%s", c.URLApi, urlStr, c.AuthToken)
-	return http.NewRequest(method, u, body)
-}
-
-func do(req *http.Request, v interface{}) (*Response, error) {
-	resp, err := http.DefaultClient.Do(req)
+// NewRequest creates a request
+func (c *Client) NewRequest(method, urlStr string, body io.Reader) (*http.Request, error) {
+	u, err := c.BaseURL.Parse(fmt.Sprintf("%s?auth_token=%s", urlStr, c.AuthToken))
 	if err != nil {
 		return nil, err
 	}
+
+	return http.NewRequest(method, u.String(), body)
+}
+
+// Do execute a request
+func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
+	resp, err := c.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer safeClose(resp.Body)
 
 	err = checkResponse(resp)
 	if err != nil {
@@ -46,12 +75,20 @@ func do(req *http.Request, v interface{}) (*Response, error) {
 	}
 
 	if v != nil {
-		decoder := json.NewDecoder(resp.Body)
-		defer safeClose(resp.Body)
-
-		err = decoder.Decode(v)
+		raw, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			return nil, err
+			return nil, &ErrorResponse{
+				Response: resp,
+				Message:  fmt.Sprintf("faild to read body: %v", err),
+			}
+		}
+
+		err = json.Unmarshal(raw, v)
+		if err != nil {
+			return nil, &ErrorResponse{
+				Response: resp,
+				Message:  fmt.Sprintf("unmarshaling error: %v: %s", err, string(raw)),
+			}
 		}
 	}
 
@@ -59,20 +96,19 @@ func do(req *http.Request, v interface{}) (*Response, error) {
 }
 
 func checkResponse(resp *http.Response) error {
-	if c := resp.StatusCode; 200 > c || c > 299 {
-		errorResponse := &ErrorResponse{Response: resp}
-		data, err := ioutil.ReadAll(resp.Body)
-		if err == nil && data != nil {
-			errJSON := json.Unmarshal(data, errorResponse)
-			if errJSON != nil {
-				log.Println(errJSON)
-			}
-		}
-		defer safeClose(resp.Body)
-		return errorResponse
+	if c := resp.StatusCode; 200 <= c && c <= 299 {
+		return nil
 	}
 
-	return nil
+	errorResponse := &ErrorResponse{Response: resp}
+	data, err := ioutil.ReadAll(resp.Body)
+	if err == nil && data != nil {
+		errJSON := json.Unmarshal(data, errorResponse)
+		if errJSON != nil {
+			errorResponse.Message = fmt.Sprintf("unmarshaling error: %v: %s", errJSON.Error(), string(data))
+		}
+	}
+	return errorResponse
 }
 
 func newResponse(resp *http.Response) *Response {
