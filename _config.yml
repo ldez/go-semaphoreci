@@ -1,1 +1,3 @@
 theme: jekyll-theme-tactile
+title: go-semaphoreci
+description: Go library for accessing the Semaphore CI API
