@@ -1,37 +1,65 @@
-## Welcome to GitHub Pages
+## Go-SemaphoreCI
 
-You can use the [editor on GitHub](https://github.com/ldez/go-semaphoreci/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+go-semaphoreci is a Go client library for accessing the https://semaphoreci.com/[Semaphore CI] API.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+* [x] link:https://semaphoreci.com/docs/branches-and-builds-api.html[API v1]
+* [~] link:http://semaphoreci.com/docs/api-v2-overview.html[API v2]
 
-### Markdown
+## Examples
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### API v1
 
-```markdown
-Syntax highlighted code block
+```go
+import (
+	"log"
 
-# Header 1
-## Header 2
-### Header 3
+	"github.com/ldez/go-semaphoreci/v1"
+)
 
-- Bulleted
-- List
+func main() {
+	authToken := "your-token"
+	client := v1.NewClient(authToken)
 
-1. Numbered
-2. List
+	projects, err := client.GetProjects()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+	for _, project := range projects {
+		log.Println(project)
+	}
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### API v2
 
-### Jekyll Themes
+```go
+import (
+	"log"
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ldez/go-semaphoreci/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+	"github.com/ldez/go-semaphoreci/v2"
+)
 
-### Support or Contact
+func main() {
+	authToken := v2.TokenTransport{
+		Token: "your-token",
+	}
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+	client := v2.NewClient(authToken.Client())
+
+	projects, resp, err := client.Projects.GetByOrg("your-organization")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("HTTP response: ", resp)
+
+	for _, project := range projects {
+		log.Println(project)
+	}
+}
+```
+
+### Documentation
+
+https://godoc.org/github.com/ldez/go-semaphoreci
