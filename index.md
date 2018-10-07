@@ -1,9 +1,9 @@
 ## Go-SemaphoreCI
 
-go-semaphoreci is a Go client library for accessing the https://semaphoreci.com/[Semaphore CI] API.
+go-semaphoreci is a Go client library for accessing the [Semaphore CI](https://semaphoreci.com/) API.
 
-* [x] link:https://semaphoreci.com/docs/branches-and-builds-api.html[API v1]
-* [~] link:http://semaphoreci.com/docs/api-v2-overview.html[API v2]
+* [x] [API v1](https://semaphoreci.com/docs/branches-and-builds-api.html)
+* [~] [API v2](http://semaphoreci.com/docs/api-v2-overview.html)
 
 ## Examples
 
