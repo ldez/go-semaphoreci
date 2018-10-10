@@ -143,40 +143,44 @@ func (r *Response) populatePageValues() {
 
 	if links, ok := r.Response.Header["Link"]; ok && len(links) > 0 {
 		for _, link := range strings.Split(links[0], ",") {
-			segments := strings.Split(strings.TrimSpace(link), ";")
+			r.loadPaginatedLink(link)
+		}
+	}
+}
 
-			// link must at least have href and rel
-			if len(segments) < 2 {
-				continue
-			}
+func (r *Response) loadPaginatedLink(link string) {
+	segments := strings.Split(strings.TrimSpace(link), ";")
 
-			// ensure href is properly formatted
-			if !strings.HasPrefix(segments[0], "<") || !strings.HasSuffix(segments[0], ">") {
-				continue
-			}
+	// link must at least have href and rel
+	if len(segments) < 2 {
+		return
+	}
 
-			// try to pull out page parameter
-			u, err := url.Parse(segments[0][1 : len(segments[0])-1])
-			if err != nil {
-				continue
-			}
-			page := u.Query().Get("page")
-			if page == "" {
-				continue
-			}
+	// ensure href is properly formatted
+	if !strings.HasPrefix(segments[0], "<") || !strings.HasSuffix(segments[0], ">") {
+		return
+	}
 
-			for _, segment := range segments[1:] {
-				switch strings.TrimSpace(segment) {
-				case `rel="next"`:
-					r.NextPage, _ = strconv.Atoi(page)
-				case `rel="prev"`:
-					r.PrevPage, _ = strconv.Atoi(page)
-				case `rel="first"`:
-					r.FirstPage, _ = strconv.Atoi(page)
-				case `rel="last"`:
-					r.LastPage, _ = strconv.Atoi(page)
-				}
-			}
+	// try to pull out page parameter
+	u, err := url.Parse(segments[0][1 : len(segments[0])-1])
+	if err != nil {
+		return
+	}
+	page := u.Query().Get("page")
+	if page == "" {
+		return
+	}
+
+	for _, segment := range segments[1:] {
+		switch strings.TrimSpace(segment) {
+		case `rel="next"`:
+			r.NextPage, _ = strconv.Atoi(page)
+		case `rel="prev"`:
+			r.PrevPage, _ = strconv.Atoi(page)
+		case `rel="first"`:
+			r.FirstPage, _ = strconv.Atoi(page)
+		case `rel="last"`:
+			r.LastPage, _ = strconv.Atoi(page)
 		}
 	}
 }
