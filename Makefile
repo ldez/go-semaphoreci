@@ -16,6 +16,9 @@ clean:
 build:
 	go build
 
+fmt:
+	gofmt -s -l -w $(GOFILES)
+
 check: check-fmt
 	golangci-lint run
 
