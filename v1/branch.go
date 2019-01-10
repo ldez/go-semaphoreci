@@ -47,9 +47,16 @@ func (c *BranchesService) GetHistory(projectHashID string, branchID int, opts *B
 	urlStr := fmt.Sprintf("projects/%s/%v", projectHashID, branchID)
 
 	if opts != nil {
-		query := url.Values{}
+		u, err := url.Parse(urlStr)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		query := u.Query()
 		query.Add("page", strconv.Itoa(opts.Page))
-		urlStr += "?" + query.Encode()
+		u.RawQuery = query.Encode()
+
+		urlStr = u.String()
 	}
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)

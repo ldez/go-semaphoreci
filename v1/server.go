@@ -47,9 +47,16 @@ func (c *ServersService) GetHistory(projectHashID string, serverID int, opts *Se
 	urlStr := fmt.Sprintf("projects/%s/servers/%v", projectHashID, serverID)
 
 	if opts != nil {
-		query := url.Values{}
+		u, err := url.Parse(urlStr)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		query := u.Query()
 		query.Add("page", strconv.Itoa(opts.Page))
-		urlStr += "?" + query.Encode()
+		u.RawQuery = query.Encode()
+
+		urlStr = u.String()
 	}
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
