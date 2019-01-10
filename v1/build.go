@@ -3,6 +3,7 @@ package v1
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 )
 
 // BuildsService https://semaphoreci.com/docs/branches-and-builds-api.html
@@ -45,6 +46,29 @@ func (c *BuildsService) RebuildLastRevision(projectHashID string, branchID int) 
 	urlStr := fmt.Sprintf("projects/%s/%v/build", projectHashID, branchID)
 
 	req, err := c.client.NewRequest(http.MethodPost, urlStr, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	v := new(BuildInformation)
+
+	_, err = c.client.Do(req, v)
+
+	return v, err
+}
+
+// Launch https://semaphoreci.com/docs/branches-and-builds-api.html#launch_build
+func (c *BuildsService) Launch(projectHashID string, branchID int, commitSHA string) (*BuildInformation, error) {
+	u, err := url.Parse(fmt.Sprintf("projects/%s/%v/build", projectHashID, branchID))
+	if err != nil {
+		return nil, err
+	}
+
+	query := u.Query()
+	query.Add("commit_sha", commitSHA)
+	u.RawQuery = query.Encode()
+
+	req, err := c.client.NewRequest(http.MethodPost, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
