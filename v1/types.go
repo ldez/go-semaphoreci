@@ -105,14 +105,29 @@ type Command struct {
 
 // Project a project
 type Project struct {
-	ID        int        `json:"id"`
-	HashID    string     `json:"hash_id"`
-	Name      string     `json:"name"`
-	Owner     string     `json:"owner"`
-	HTMLURL   string     `json:"html_url"`
-	CreatedAt *time.Time `json:"created_at"`
-	UpdatedAt *time.Time `json:"updated_at"`
-	Branches  []Branch   `json:"branches"`
+	ID        int             `json:"id"`
+	HashID    string          `json:"hash_id"`
+	Name      string          `json:"name"`
+	Owner     string          `json:"owner"`
+	HTMLURL   string          `json:"html_url"`
+	CreatedAt *time.Time      `json:"created_at"`
+	UpdatedAt *time.Time      `json:"updated_at"`
+	Branches  []ProjectBranch `json:"branches"`
+}
+
+// ProjectBranch a branch in project
+type ProjectBranch struct {
+	Name         string     `json:"branch_name"`
+	URL          string     `json:"branch_url"`
+	StatusURL    string     `json:"branch_status_url"`
+	HistoryURL   string     `json:"branch_history_url"`
+	ProjectName  string     `json:"project_name"`
+	BuildURL     string     `json:"build_url"`
+	BuildInfoURL string     `json:"build_info_url"`
+	BuildNumber  int        `json:"build_number"`
+	Result       string     `json:"result"`
+	StartedAt    *time.Time `json:"started_at"`
+	FinishedAt   *time.Time `json:"finished_at"`
 }
 
 // Server a server
