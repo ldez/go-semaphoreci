@@ -1,0 +1,12 @@
+[
+  {
+    "id": 256,
+    "url": "http://semaphoreflag.herokuapp.com/qH36J7zzMAxmF72f",
+    "hook_type": "post_build"
+  },
+  {
+    "id": 257,
+    "url": "http://semaphoreflag.herokuapp.com/qH36sdffgae2f",
+    "hook_type": "post_deploy"
+  }
+]

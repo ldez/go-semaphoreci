@@ -1,0 +1,23 @@
+{
+  "commits": [
+    {
+      "id": "9d4a35a78942d52ddc88d6e75dbde44d1ba4fa50",
+      "url": "https://github.com/renderedtext/base-app/commit/9d4a35a78942d52ddc88d6e75dbde44d1ba4fa50",
+      "author_name": "Marko Anastasov",
+      "author_email": "marko@renderedtext.com",
+      "message": "Update cucumber-rails",
+      "timestamp": "2014-01-31T13:02:27+01:00"
+    }
+  ],
+  "project_name": "base-app",
+  "branch_name": "master",
+  "number": 45,
+  "result": null,
+  "created_at": "2014-08-18T17:04:52+02:00",
+  "updated_at": "2014-08-18T17:04:53+02:00",
+  "started_at": null,
+  "finished_at": null,
+  "html_url": "https://semaphoreci.com/renderedtext/base-app/branches/master/builds/45",
+  "build_log_url": "https://semaphoreci.com/api/v1/projects/73c4b979-0a40-49db-b10e-571d41e10d9a/133529/builds/45/log?auth_token=:auth_token",
+  "build_info_url": "https://semaphoreci.com/api/v1/projects/73c4b979-0a40-49db-b10e-571d41e10d9a/133529/builds/45?auth_token=:auth_token"
+}

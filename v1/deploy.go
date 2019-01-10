@@ -26,8 +26,6 @@ func (c *DeploysService) GetInformation(projectHashID string, serverID int, numb
 
 // GetLog https://semaphoreci.com/docs/servers-and-deploys-api.html#deploy_log
 func (c *DeploysService) GetLog(projectHashID string, serverID int, number int) (*DeployLog, error) {
-	// GET /api/v1/projects/:hash_id/servers/:id/deploys/:number/log
-
 	urlStr := fmt.Sprintf("projects/%s/servers/%v/deploys/%v/log", projectHashID, serverID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)

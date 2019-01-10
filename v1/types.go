@@ -58,17 +58,18 @@ type Build struct {
 
 // BuildInformation information about the build
 type BuildInformation struct {
-	Commits     []Commit   `json:"commits"`
-	ProjectName string     `json:"project_name"`
-	BranchName  string     `json:"branch_name"`
-	Number      int        `json:"number,omitempty"`
-	Result      string     `json:"result"`
-	CreatedAt   *time.Time `json:"created_at"`
-	UpdatedAt   *time.Time `json:"updated_at"`
-	StartedAt   *time.Time `json:"started_at"`
-	FinishedAt  *time.Time `json:"finished_at"`
-	HTMLURL     string     `json:"html_url"`
-	BuildLogURL string     `json:"build_log_url"`
+	Commits      []Commit   `json:"commits"`
+	ProjectName  string     `json:"project_name"`
+	BranchName   string     `json:"branch_name"`
+	Number       int        `json:"number,omitempty"`
+	Result       string     `json:"result"`
+	CreatedAt    *time.Time `json:"created_at"`
+	UpdatedAt    *time.Time `json:"updated_at"`
+	StartedAt    *time.Time `json:"started_at"`
+	FinishedAt   *time.Time `json:"finished_at"`
+	HTMLURL      string     `json:"html_url"`
+	BuildLogURL  string     `json:"build_log_url"`
+	BuildInfoURL string     `json:"build_info_url"`
 }
 
 // Commit a commit
@@ -119,6 +120,7 @@ type Project struct {
 	CreatedAt *time.Time      `json:"created_at"`
 	UpdatedAt *time.Time      `json:"updated_at"`
 	Branches  []ProjectBranch `json:"branches"`
+	Servers   []ServerStatus  `json:"servers"`
 }
 
 // ProjectBranch a branch in project
@@ -145,20 +147,26 @@ type Server struct {
 
 // ServerStatus a server
 type ServerStatus struct {
-	ProjectName  string     `json:"project_name"`
-	ServerName   string     `json:"server_name"`
-	Number       int        `json:"number"`
-	Result       string     `json:"result"`
-	CreatedAt    *time.Time `json:"created_at"`
-	UpdatedAt    *time.Time `json:"updated_at"`
-	StartedAt    *time.Time `json:"started_at"`
-	FinishedAt   *time.Time `json:"finished_at"`
-	HTMLURL      string     `json:"html_url"`
-	DeployURL    string     `json:"deploy_url"`
-	DeployLogURL string     `json:"deploy_log_url"`
-	BuildURL     string     `json:"build_url"`
-	BuildHTMLURL string     `json:"build_html_url"`
-	Commit       *Commit    `json:"commit"`
+	ServerName       string     `json:"server_name"`
+	ServerURL        string     `json:"server_url"`
+	ServerStatusURL  string     `json:"server_status_url"`
+	ServerHistoryURL string     `json:"server_history_url"`
+	DeploymentMethod string     `json:"deployment_method"`
+	Strategy         string     `json:"strategy"`
+	BranchName       string     `json:"branch_name"`
+	ProjectName      string     `json:"project_name"`
+	Number           int        `json:"number"`
+	Result           string     `json:"result"`
+	CreatedAt        *time.Time `json:"created_at"`
+	UpdatedAt        *time.Time `json:"updated_at"`
+	StartedAt        *time.Time `json:"started_at"`
+	FinishedAt       *time.Time `json:"finished_at"`
+	HTMLURL          string     `json:"html_url"`
+	DeployURL        string     `json:"deploy_url"`
+	DeployLogURL     string     `json:"deploy_log_url"`
+	BuildURL         string     `json:"build_url"`
+	BuildHTMLURL     string     `json:"build_html_url"`
+	Commit           *Commit    `json:"commit"`
 }
 
 // ServerDeploy a server deploy

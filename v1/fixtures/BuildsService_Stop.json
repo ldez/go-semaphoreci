@@ -1,0 +1,23 @@
+{
+  "commits": [
+    {
+      "id": "222f0123418545f21234184a4725fe16asfa125123",
+      "url": "https://github.com/renderedtext/semaphore/commit/222f0123418545f21234184a4725fe16asfa125123",
+      "author_name": "Marko Anastasov",
+      "author_email": "marko@renderedtext.com",
+      "message": "Merge branch 'staging'",
+      "timestamp": "2013-07-22T17:52:27+02:00"
+    }
+  ],
+  "project_name": "base-app",
+  "branch_name": "master",
+  "number": 27,
+  "result": "stopped",
+  "created_at": "2014-08-18T17:04:52+02:00",
+  "updated_at": "2014-08-18T17:04:53+02:00",
+  "started_at": "2014-08-18T17:04:59+02:00",
+  "finished_at": null,
+  "html_url": "https://semaphoreci.com/projects/1/branches/29803/builds/27",
+  "build_log_url": "https://semaphoreci.com/api/v1/projects/73c4b979-0a40-49db-b10e-571d41e10d9a/133529/builds/27/log?auth_token=:auth_token",
+  "build_info_url": "https://semaphoreci.com/api/v1/projects/73c4b979-0a40-49db-b10e-571d41e10d9a/133529/builds/27?auth_token=:auth_token"
+}
