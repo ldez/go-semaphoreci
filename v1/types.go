@@ -192,6 +192,13 @@ type Deploy struct {
 	Commit       *Commit    `json:"commit"`
 }
 
+// WebHook a WebHook
+type WebHook struct {
+	ID       int    `json:"id,omitempty"`
+	URL      string `json:"url"`
+	HookType string `json:"hook_type"`
+}
+
 // Pagination Pagination headers
 type Pagination struct {
 	TotalEntries int  `json:"total_entries,omitempty"`
