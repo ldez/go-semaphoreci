@@ -87,6 +87,12 @@ type BuildLog struct {
 	BuildInfoURL string   `json:"build_info_url"`
 }
 
+// DeployLog a deploy log
+type DeployLog struct {
+	Threads       []Thread `json:"threads"`
+	DeployInfoURL string   `json:"deploy_info_url"`
+}
+
 // Thread a thread
 type Thread struct {
 	Number   int       `json:"number"`
