@@ -18,10 +18,12 @@ func TestConfigFilesService_GetByProject(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -51,10 +53,12 @@ func TestConfigFilesService_GetBySecret(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_GetBySecret.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -84,10 +88,12 @@ func TestConfigFilesService_Get(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 

@@ -18,10 +18,12 @@ func TestSecretsService_GetByOrg(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/SecretsService_GetByOrg.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -54,10 +56,12 @@ func TestSecretsService_GetByTeam(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/SecretsService_GetByTeam.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -90,10 +94,12 @@ func TestSecretsService_GetByProject(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/SecretsService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -126,10 +132,12 @@ func TestSecretsService_Get(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/SecretsService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 

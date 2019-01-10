@@ -18,10 +18,12 @@ func TestEnvVarsService_GetByProject(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/EnvVarsService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -51,10 +53,12 @@ func TestEnvVarsService_GetBySecret(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/EnvVarsService_GetBySecret.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
@@ -84,10 +88,12 @@ func TestEnvVarsService_Get(t *testing.T) {
 		content, err := ioutil.ReadFile("fixtures/EnvVarsService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 		_, err = w.Write(content)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 	})
 
