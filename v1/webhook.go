@@ -14,11 +14,11 @@ const (
 	All        = "all"
 )
 
-// WebHookService https://semaphoreci.com/docs/webhooks-api.html
-type WebHookService service
+// WebHooksService https://semaphoreci.com/docs/webhooks-api.html
+type WebHooksService service
 
 // GetByProject https://semaphoreci.com/docs/webhooks-api.html#list_hooks
-func (c *WebHookService) GetByProject(projectHashID string) ([]WebHook, *Response, error) {
+func (c *WebHooksService) GetByProject(projectHashID string) ([]WebHook, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/hooks", projectHashID)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
@@ -34,7 +34,7 @@ func (c *WebHookService) GetByProject(projectHashID string) ([]WebHook, *Respons
 }
 
 // Create https://semaphoreci.com/docs/webhooks-api.html#create_hook
-func (c *WebHookService) Create(projectHashID string, hook WebHook) (*WebHook, *Response, error) {
+func (c *WebHooksService) Create(projectHashID string, hook WebHook) (*WebHook, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/hooks", projectHashID)
 
 	body, err := json.Marshal(hook)
@@ -55,7 +55,7 @@ func (c *WebHookService) Create(projectHashID string, hook WebHook) (*WebHook, *
 }
 
 // Update https://semaphoreci.com/docs/webhooks-api.html#update_hook
-func (c *WebHookService) Update(projectHashID string, webHookID int, hook WebHook) (*WebHook, *Response, error) {
+func (c *WebHooksService) Update(projectHashID string, webHookID int, hook WebHook) (*WebHook, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/hooks/%v", projectHashID, webHookID)
 
 	body, err := json.Marshal(hook)
@@ -76,7 +76,7 @@ func (c *WebHookService) Update(projectHashID string, webHookID int, hook WebHoo
 }
 
 // Delete https://semaphoreci.com/docs/webhooks-api.html#delete_hook
-func (c *WebHookService) Delete(projectHashID string, webHookID int) (*Response, error) {
+func (c *WebHooksService) Delete(projectHashID string, webHookID int) (*Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/hooks/%v", projectHashID, webHookID)
 
 	req, err := c.client.NewRequest(http.MethodDelete, urlStr, nil)

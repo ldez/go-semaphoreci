@@ -28,8 +28,8 @@ type Client struct {
 	Builds   *BuildsService
 	Projects *ProjectsService
 	Servers  *ServersService
-	Deploy   *DeployService
-	WebHook  *WebHookService
+	Deploys  *DeploysService
+	WebHooks *WebHooksService
 }
 
 // NewClient create a new API v1 client
@@ -47,8 +47,8 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Builds = (*BuildsService)(&c.common)
 	c.Projects = (*ProjectsService)(&c.common)
 	c.Servers = (*ServersService)(&c.common)
-	c.Deploy = (*DeployService)(&c.common)
-	c.WebHook = (*WebHookService)(&c.common)
+	c.Deploys = (*DeploysService)(&c.common)
+	c.WebHooks = (*WebHooksService)(&c.common)
 
 	return c
 }

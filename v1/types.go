@@ -174,6 +174,11 @@ type ServerDeploy struct {
 	Deploys          []Deploy `json:"deploys"`
 }
 
+// ServerHistoryOptions the server history pagination options
+type ServerHistoryOptions struct {
+	Page int
+}
+
 // Deploy a deploy
 type Deploy struct {
 	ProjectName  string     `json:"project_name"`

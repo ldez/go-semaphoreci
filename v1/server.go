@@ -41,7 +41,7 @@ func (c *ServersService) GetStatus(projectHashID string, serverID int) (*ServerS
 }
 
 // GetHistory https://semaphoreci.com/docs/servers-and-deploys-api.html#server_history
-func (c *ServersService) GetHistory(projectHashID string, serverID int) (*ServerDeploy, *Response, error) {
+func (c *ServersService) GetHistory(projectHashID string, serverID int, opts *ServerHistoryOptions) (*ServerDeploy, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v", projectHashID, serverID)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
