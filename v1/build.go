@@ -57,9 +57,9 @@ func (c *BuildsService) RebuildLastRevision(projectHashID string, branchID int) 
 	return v, err
 }
 
-// LaunchBuild https://semaphoreci.com/docs/branches-and-builds-api.html#launch_build
-func (c *BuildsService) LaunchBuild(projectHashID string, branchID int, commitSHA string) (*BuildInformation, error) {
-	u, err := url.Parse(fmt.Sprintf("projects/%s/%v/build?", projectHashID, branchID))
+// Launch https://semaphoreci.com/docs/branches-and-builds-api.html#launch_build
+func (c *BuildsService) Launch(projectHashID string, branchID int, commitSHA string) (*BuildInformation, error) {
+	u, err := url.Parse(fmt.Sprintf("projects/%s/%v/build", projectHashID, branchID))
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (c *BuildsService) LaunchBuild(projectHashID string, branchID int, commitSH
 	query.Add("commit_sha", commitSHA)
 	u.RawQuery = query.Encode()
 
-	req, err := c.client.NewRequest(http.MethodPost, u.RawQuery, nil)
+	req, err := c.client.NewRequest(http.MethodPost, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
