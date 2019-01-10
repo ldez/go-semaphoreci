@@ -4,6 +4,14 @@ import (
 	"net/http"
 )
 
+// Build status
+const (
+	Passed  = "passed"
+	Failed  = "failed"
+	Stopped = "stopped"
+	Pending = "pending"
+)
+
 // ProjectsService https://semaphoreci.com/docs/projects-api.html
 type ProjectsService service
 

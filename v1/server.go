@@ -3,6 +3,8 @@ package v1
 import (
 	"fmt"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
 // ServersService https://semaphoreci.com/docs/servers-and-deploys-api.html
@@ -43,6 +45,12 @@ func (c *ServersService) GetStatus(projectHashID string, serverID int) (*ServerS
 // GetHistory https://semaphoreci.com/docs/servers-and-deploys-api.html#server_history
 func (c *ServersService) GetHistory(projectHashID string, serverID int, opts *ServerHistoryOptions) (*ServerDeploy, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v", projectHashID, serverID)
+
+	if opts != nil {
+		query := url.Values{}
+		query.Add("page", strconv.Itoa(opts.Page))
+		urlStr += "?" + query.Encode()
+	}
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {

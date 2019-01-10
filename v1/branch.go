@@ -3,6 +3,8 @@ package v1
 import (
 	"fmt"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
 // BranchesService https://semaphoreci.com/docs/branches-and-builds-api.html
@@ -43,6 +45,12 @@ func (c *BranchesService) GetStatus(projectHashID string, branchID int) (*Branch
 // GetHistory https://semaphoreci.com/docs/branches-and-builds-api.html#branch_history
 func (c *BranchesService) GetHistory(projectHashID string, branchID int, opts *BranchHistoryOptions) (*BranchHistory, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v", projectHashID, branchID)
+
+	if opts != nil {
+		query := url.Values{}
+		query.Add("page", strconv.Itoa(opts.Page))
+		urlStr += "?" + query.Encode()
+	}
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
 	if err != nil {
