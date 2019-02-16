@@ -17,11 +17,10 @@ build:
 	go build
 
 fmt:
-	gofmt -s -l -w $(GOFILES)
+	@gofmt -s -l -w $(GOFILES)
 
-check: check-fmt
+imports:
+	@goimports -w $(GOFILES)
+
+check:
 	golangci-lint run
-
-check-fmt: SHELL := /bin/bash
-check-fmt:
-	diff -u <(echo -n) <(gofmt -d $(GOFILES))
