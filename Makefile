@@ -1,4 +1,4 @@
-.PHONY: all
+.PHONY: clean dependencies check test build fmt imports
 
 GOFILES := $(shell go list -f '{{range $$index, $$element := .GoFiles}}{{$$.Dir}}/{{$$element}}{{"\n"}}{{end}}' ./... | grep -v '/vendor/')
 
@@ -12,9 +12,6 @@ dependencies:
 
 clean:
 	rm -f cover.out
-
-build:
-	go build
 
 fmt:
 	@gofmt -s -l -w $(GOFILES)
