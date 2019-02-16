@@ -8,8 +8,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-
-	"github.com/pkg/errors"
 )
 
 const (
@@ -73,7 +71,7 @@ func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 
 	err = checkResponse(resp)
 	if err != nil {
-		return nil, errors.Cause(err)
+		return nil, err
 	}
 
 	if v != nil {
