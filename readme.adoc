@@ -4,6 +4,8 @@ image:https://travis-ci.org/ldez/go-semaphoreci.svg?branch=master["Build Status"
 image:https://godoc.org/github.com/ldez/go-semaphoreci?status.svg["GoDoc", link="https://godoc.org/github.com/ldez/go-semaphoreci"]
 image:https://goreportcard.com/badge/github.com/ldez/go-semaphoreci["Go Report Card", link="https://goreportcard.com/report/github.com/ldez/go-semaphoreci"]
 
+image:https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg["Say Thanks!", link="https://saythanks.io/to/ldez"]
+
 go-semaphoreci is a Go client library for accessing the https://semaphoreci.com/[Semaphore CI] API.
 
 * [x] link:https://semaphoreci.com/docs/branches-and-builds-api.html[API v1]
