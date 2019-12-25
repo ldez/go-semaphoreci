@@ -1,3 +1,8 @@
+/*
+Package v1 Access to the API v1 of SemaphoreCI.
+
+Reference: https://semaphoreci.com/docs/branches-and-builds-api.html
+*/
 package v1
 
 import (

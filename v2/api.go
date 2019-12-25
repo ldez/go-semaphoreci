@@ -1,3 +1,8 @@
+/*
+Package v2 Access to the API v2 of SemaphoreCI.
+
+Reference: http://semaphoreci.com/docs/api-v2-overview.html
+*/
 package v2
 
 import (
