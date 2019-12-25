@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"gotest.tools/assert"
+	"gotest.tools/v3/assert"
 )
 
 func TestUsersService_GetByOrg(t *testing.T) {

@@ -1,4 +1,6 @@
-.PHONY: clean dependencies check test build fmt imports
+.PHONY: clean check test build fmt imports
+
+export GO111MODULE=on
 
 GOFILES := $(shell go list -f '{{range $$index, $$element := .GoFiles}}{{$$.Dir}}/{{$$element}}{{"\n"}}{{end}}' ./... | grep -v '/vendor/')
 
@@ -6,9 +8,6 @@ default: clean check test
 
 test: clean
 	go test -v -cover ./...
-
-dependencies:
-	dep ensure -v
 
 clean:
 	rm -f cover.out
