@@ -27,6 +27,7 @@ linters:
     - prealloc
     - wsl
     - godox
+    - gomnd
 
 issues:
   exclude-use-default: false

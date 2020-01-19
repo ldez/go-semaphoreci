@@ -1,6 +1,6 @@
 = Go library for accessing the Semaphore CI API
 
-image:https://travis-ci.org/ldez/go-semaphoreci.svg?branch=master["Build Status", link="https://travis-ci.org/ldez/go-semaphoreci"]
+image:https://travis-ci.com/ldez/go-semaphoreci.svg?branch=master["Build Status", link="https://travis-ci.com/ldez/go-semaphoreci"]
 image:https://godoc.org/github.com/ldez/go-semaphoreci?status.svg["GoDoc", link="https://godoc.org/github.com/ldez/go-semaphoreci"]
 image:https://goreportcard.com/badge/github.com/ldez/go-semaphoreci["Go Report Card", link="https://goreportcard.com/report/github.com/ldez/go-semaphoreci"]
 
