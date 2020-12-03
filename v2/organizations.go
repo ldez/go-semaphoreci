@@ -8,7 +8,7 @@ import (
 // OrganizationsService http://semaphoreci.com/docs/api-v2-orgs.html
 type OrganizationsService service
 
-// GetYours List your organizations
+// GetYours List your organizations.
 // http://semaphoreci.com/docs/api-v2-orgs.html#list-your-organizations
 func (c *OrganizationsService) GetYours() ([]Organization, *Response, error) {
 	req, err := c.client.NewRequest(http.MethodGet, "orgs", nil)
@@ -23,7 +23,7 @@ func (c *OrganizationsService) GetYours() ([]Organization, *Response, error) {
 	return *v, resp, err
 }
 
-// Get Get an organization
+// Get Get an organization.
 // http://semaphoreci.com/docs/api-v2-orgs.html#get-an-organization
 func (c *OrganizationsService) Get(username string) (*Organization, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s", username)

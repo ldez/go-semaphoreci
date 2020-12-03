@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// TokenTransport HTTP transport for API authentication
+// TokenTransport HTTP transport for API authentication.
 type TokenTransport struct {
 	Token string
 
@@ -13,7 +13,7 @@ type TokenTransport struct {
 	Transport http.RoundTripper
 }
 
-// RoundTrip executes a single HTTP transaction
+// RoundTrip executes a single HTTP transaction.
 func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	enrichedReq := &http.Request{}
 	*enrichedReq = *req
@@ -32,7 +32,7 @@ func (t *TokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	return t.transport().RoundTrip(enrichedReq)
 }
 
-// Client Creates a new HTTP client
+// Client Creates a new HTTP client.
 func (t *TokenTransport) Client() *http.Client {
 	return &http.Client{Transport: t}
 }

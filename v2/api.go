@@ -25,7 +25,7 @@ const (
 	headerRateReset     = "X-RateLimit-Reset"
 )
 
-// Client API v2 client
+// Client API v2 client.
 type Client struct {
 	BaseURL   *url.URL
 	UserAgent string
@@ -42,7 +42,7 @@ type Client struct {
 	Users         *UsersService
 }
 
-// NewClient creates a new API v2 client
+// NewClient creates a new API v2 client.
 func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
@@ -64,7 +64,7 @@ func NewClient(httpClient *http.Client) *Client {
 	return c
 }
 
-// NewRequest creates a request
+// NewRequest creates a request.
 func (c *Client) NewRequest(method, urlStr string, body io.Reader) (*http.Request, error) {
 	u, err := c.BaseURL.Parse(urlStr)
 	if err != nil {
@@ -83,7 +83,7 @@ func (c *Client) NewRequest(method, urlStr string, body io.Reader) (*http.Reques
 	return req, nil
 }
 
-// Do execute a request
+// Do execute a request.
 func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 	resp, err := c.client.Do(req)
 	if err != nil {

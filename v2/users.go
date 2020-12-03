@@ -8,7 +8,7 @@ import (
 // UsersService http://semaphoreci.com/docs/api-v2-users.html
 type UsersService service
 
-// GetByOrg List all users for a organization
+// GetByOrg List all users for a organization.
 // http://semaphoreci.com/docs/api-v2-users.html#list-all-users-for-a-organization
 func (c *UsersService) GetByOrg(orgUsername string) ([]User, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s/users", orgUsername)
@@ -25,7 +25,7 @@ func (c *UsersService) GetByOrg(orgUsername string) ([]User, *Response, error) {
 	return *v, resp, err
 }
 
-// GetByTeam List members of a team
+// GetByTeam List members of a team.
 // http://semaphoreci.com/docs/api-v2-users.html#list-members-of-a-team
 func (c *UsersService) GetByTeam(teamID string) ([]User, *Response, error) {
 	urlStr := fmt.Sprintf("teams/%s/users", teamID)
@@ -42,7 +42,7 @@ func (c *UsersService) GetByTeam(teamID string) ([]User, *Response, error) {
 	return *v, resp, err
 }
 
-// GetByProject List all users for a project
+// GetByProject List all users for a project.
 // http://semaphoreci.com/docs/api-v2-users.html#list-all-users-for-a-project
 func (c *UsersService) GetByProject(projectID string) ([]User, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/users", projectID)

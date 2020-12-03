@@ -8,7 +8,7 @@ import (
 // EnvVarsService http://semaphoreci.com/docs/api-v2-env-vars.html
 type EnvVarsService service
 
-// GetByProject List environment variables connected to a project
+// GetByProject List environment variables connected to a project.
 // http://semaphoreci.com/docs/api-v2-env-vars.html#list-environment-variables-connected-to-a-project
 func (c *EnvVarsService) GetByProject(projectID string) ([]EnvVar, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/env_vars", projectID)
@@ -25,7 +25,7 @@ func (c *EnvVarsService) GetByProject(projectID string) ([]EnvVar, *Response, er
 	return *v, resp, err
 }
 
-// GetBySecret List environment variables belonging to a secret
+// GetBySecret List environment variables belonging to a secret.
 // http://semaphoreci.com/docs/api-v2-env-vars.html#list-environment-variables-belonging-to-a-secret
 func (c *EnvVarsService) GetBySecret(secretID string) ([]EnvVar, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s/env_vars", secretID)
@@ -42,7 +42,7 @@ func (c *EnvVarsService) GetBySecret(secretID string) ([]EnvVar, *Response, erro
 	return *v, resp, err
 }
 
-// Get Get an environment variable
+// Get Get an environment variable.
 // http://semaphoreci.com/docs/api-v2-env-vars.html#get-an-environment-variable
 func (c *EnvVarsService) Get(envVarID string) (*EnvVar, *Response, error) {
 	urlStr := fmt.Sprintf("env_vars/%s", envVarID)

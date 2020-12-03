@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// Project An API project representation
+// Project An API project representation.
 type Project struct {
 	ID         string     `json:"id"`
 	Name       string     `json:"name"`
@@ -20,7 +20,7 @@ type Project struct {
 	CreatedAt  *time.Time `json:"created_at"`
 }
 
-// Organization An API organization representation
+// Organization An API organization representation.
 type Organization struct {
 	ID          string     `json:"id"`
 	Name        string     `json:"name"`
@@ -34,7 +34,7 @@ type Organization struct {
 	UpdatedAt   *time.Time `json:"updated_at"`
 }
 
-// ConfigFile An API configuration file representation
+// ConfigFile An API configuration file representation.
 type ConfigFile struct {
 	ID        string     `json:"id"`
 	Path      string     `json:"path"`
@@ -46,7 +46,7 @@ type ConfigFile struct {
 	UpdatedAt *time.Time `json:"updated_at"`
 }
 
-// EnvVar An API environment variables representation
+// EnvVar An API environment variables representation.
 type EnvVar struct {
 	ID        string     `json:"id"`
 	Name      string     `json:"name"`
@@ -58,7 +58,7 @@ type EnvVar struct {
 	UpdatedAt *time.Time `json:"updated_at"`
 }
 
-// Secret An API secret representation
+// Secret An API secret representation.
 type Secret struct {
 	ID             string     `json:"id"`
 	Name           string     `json:"name"`
@@ -72,7 +72,7 @@ type Secret struct {
 	UpdatedAt      *time.Time `json:"updated_at"`
 }
 
-// Team An API team representation
+// Team An API team representation.
 type Team struct {
 	ID          string     `json:"id"`
 	Name        string     `json:"name"`
@@ -86,7 +86,7 @@ type Team struct {
 	UpdatedAt   *time.Time `json:"updated_at"`
 }
 
-// User An API user representation
+// User An API user representation.
 type User struct {
 	UID       string     `json:"uid"`
 	Username  string     `json:"username"`
@@ -99,7 +99,7 @@ type service struct {
 	client *Client
 }
 
-// ErrorResponse An API error representation
+// ErrorResponse An API error representation.
 type ErrorResponse struct {
 	Response         *http.Response    `json:"-"`
 	Message          string            `json:"message,omitempty"`
@@ -111,14 +111,14 @@ func (e *ErrorResponse) Error() string {
 	return e.Message
 }
 
-// ErrorValidation An API validation error representation
+// ErrorValidation An API validation error representation.
 type ErrorValidation struct {
 	Resource string `json:"resource"`
 	Field    string `json:"field"`
 	Code     string `json:"code"`
 }
 
-// Response API response
+// Response API response.
 type Response struct {
 	*http.Response
 
@@ -185,14 +185,14 @@ func (r *Response) loadPaginatedLink(link string) {
 	}
 }
 
-// Rate a rate limit representation
+// Rate a rate limit representation.
 type Rate struct {
 	Limit     int       `json:"limit"`
 	Remaining int       `json:"remaining"`
 	Reset     time.Time `json:"reset"`
 }
 
-// RateLimitError An API rate limit error representation
+// RateLimitError An API rate limit error representation.
 type RateLimitError struct {
 	Rate     Rate
 	Response *http.Response

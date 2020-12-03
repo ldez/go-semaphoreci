@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-// hook type
+// hook type.
 const (
 	PostBuild  = "post_build"
 	PostDeploy = "post_deploy"

@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-// Branch a branch
+// Branch a branch.
 type Branch struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
 	BranchURL string `json:"branch_url"`
 }
 
-// BranchStatus a branch status
+// BranchStatus a branch status.
 type BranchStatus struct {
 	BranchName       string     `json:"branch_name"`
 	BranchURL        string     `json:"branch_url"`
@@ -30,12 +30,12 @@ type BranchStatus struct {
 	Commit           Commit     `json:"commit"`
 }
 
-// BranchHistoryOptions the branch history pagination options
+// BranchHistoryOptions the branch history pagination options.
 type BranchHistoryOptions struct {
 	Page int
 }
 
-// BranchHistory a branch history
+// BranchHistory a branch history.
 type BranchHistory struct {
 	BranchName       string  `json:"branch_name"`
 	BranchURL        string  `json:"branch_url"`
@@ -45,7 +45,7 @@ type BranchHistory struct {
 	Builds           []Build `json:"builds"`
 }
 
-// Build a build
+// Build a build.
 type Build struct {
 	BuildURL     string     `json:"build_url"`
 	BuildInfoURL string     `json:"build_info_url"`
@@ -56,7 +56,7 @@ type Build struct {
 	Commit       Commit     `json:"commit"`
 }
 
-// BuildInformation information about the build
+// BuildInformation information about the build.
 type BuildInformation struct {
 	Commits      []Commit   `json:"commits"`
 	ProjectName  string     `json:"project_name"`
@@ -72,7 +72,7 @@ type BuildInformation struct {
 	BuildInfoURL string     `json:"build_info_url"`
 }
 
-// Commit a commit
+// Commit a commit.
 type Commit struct {
 	ID          string     `json:"id"`
 	URL         string     `json:"url"`
@@ -82,25 +82,25 @@ type Commit struct {
 	Timestamp   *time.Time `json:"timestamp" `
 }
 
-// BuildLog a build log
+// BuildLog a build log.
 type BuildLog struct {
 	Threads      []Thread `json:"threads"`
 	BuildInfoURL string   `json:"build_info_url"`
 }
 
-// DeployLog a deploy log
+// DeployLog a deploy log.
 type DeployLog struct {
 	Threads       []Thread `json:"threads"`
 	DeployInfoURL string   `json:"deploy_info_url"`
 }
 
-// Thread a thread
+// Thread a thread.
 type Thread struct {
 	Number   int       `json:"number"`
 	Commands []Command `json:"commands"`
 }
 
-// Command a command
+// Command a command.
 type Command struct {
 	Name       string     `json:"name"`
 	Result     string     `json:"result"`
@@ -110,7 +110,7 @@ type Command struct {
 	Duration   string     `json:"duration"`
 }
 
-// Project a project
+// Project a project.
 type Project struct {
 	ID        int             `json:"id"`
 	HashID    string          `json:"hash_id"`
@@ -123,7 +123,7 @@ type Project struct {
 	Servers   []ServerStatus  `json:"servers"`
 }
 
-// ProjectBranch a branch in project
+// ProjectBranch a branch in project.
 type ProjectBranch struct {
 	Name         string     `json:"branch_name"`
 	URL          string     `json:"branch_url"`
@@ -138,14 +138,14 @@ type ProjectBranch struct {
 	FinishedAt   *time.Time `json:"finished_at"`
 }
 
-// Server a server
+// Server a server.
 type Server struct {
 	ID        int    `json:"id"`
 	Name      string `json:"name"`
 	ServerURL string `json:"server_url"`
 }
 
-// ServerStatus a server
+// ServerStatus a server.
 type ServerStatus struct {
 	ServerName       string     `json:"server_name"`
 	ServerURL        string     `json:"server_url"`
@@ -169,7 +169,7 @@ type ServerStatus struct {
 	Commit           *Commit    `json:"commit"`
 }
 
-// ServerDeploy a server deploy
+// ServerDeploy a server deploy.
 type ServerDeploy struct {
 	ServerName       string   `json:"server_name"`
 	ServerURL        string   `json:"server_url"`
@@ -182,12 +182,12 @@ type ServerDeploy struct {
 	Deploys          []Deploy `json:"deploys"`
 }
 
-// ServerHistoryOptions the server history pagination options
+// ServerHistoryOptions the server history pagination options.
 type ServerHistoryOptions struct {
 	Page int
 }
 
-// Deploy a deploy
+// Deploy a deploy.
 type Deploy struct {
 	ProjectName  string     `json:"project_name"`
 	ServerName   string     `json:"server_name"`
@@ -205,14 +205,14 @@ type Deploy struct {
 	Commit       *Commit    `json:"commit"`
 }
 
-// WebHook a WebHook
+// WebHook a WebHook.
 type WebHook struct {
 	ID       int    `json:"id,omitempty"`
 	URL      string `json:"url"`
 	HookType string `json:"hook_type"`
 }
 
-// Pagination Pagination headers
+// Pagination Pagination headers.
 type Pagination struct {
 	TotalEntries int  `json:"total_entries,omitempty"`
 	TotalPages   int  `json:"total_pages,omitempty"`
@@ -228,7 +228,7 @@ type service struct {
 	client *Client
 }
 
-// Response API response
+// Response API response.
 type Response struct {
 	*http.Response
 	*Pagination
@@ -243,7 +243,7 @@ func (r *Response) populatePageValues() error {
 	return nil
 }
 
-// ErrorResponse API error response
+// ErrorResponse API error response.
 type ErrorResponse struct {
 	Response *http.Response `json:"-"`     // HTTP response that caused this error
 	Message  string         `json:"error"` // error message

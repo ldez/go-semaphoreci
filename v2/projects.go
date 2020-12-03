@@ -8,7 +8,7 @@ import (
 // ProjectsService http://semaphoreci.com/docs/api-v2-projects.html
 type ProjectsService service
 
-// GetByOrg List projects in an organization
+// GetByOrg List projects in an organization.
 // http://semaphoreci.com/docs/api-v2-projects.html#list-projects-in-an-organization
 func (c *ProjectsService) GetByOrg(orgUsername string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s/projects", orgUsername)
@@ -25,7 +25,7 @@ func (c *ProjectsService) GetByOrg(orgUsername string) ([]Project, *Response, er
 	return *v, resp, err
 }
 
-// GetByTeam List project added to a team
+// GetByTeam List project added to a team.
 // http://semaphoreci.com/docs/api-v2-projects.html#list-project-added-to-a-team
 func (c *ProjectsService) GetByTeam(teamID string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("teams/%s/projects", teamID)
@@ -42,7 +42,7 @@ func (c *ProjectsService) GetByTeam(teamID string) ([]Project, *Response, error)
 	return *v, resp, err
 }
 
-// GetBySecret List projects for a secret
+// GetBySecret List projects for a secret.
 // http://semaphoreci.com/docs/api-v2-projects.html#list-projects-for-a-secret
 func (c *ProjectsService) GetBySecret(secretID string) ([]Project, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s/projects", secretID)

@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// Build status
+// Build status.
 const (
 	Passed  = "passed"
 	Failed  = "failed"

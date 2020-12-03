@@ -8,7 +8,7 @@ import (
 // ConfigFilesService http://semaphoreci.com/docs/api-v2-config-files.html
 type ConfigFilesService service
 
-// GetByProject List config files connected to a project
+// GetByProject List config files connected to a project.
 // http://semaphoreci.com/docs/api-v2-config-files.html#list-config-files-connected-to-a-project
 func (c *ConfigFilesService) GetByProject(projectID string) ([]ConfigFile, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/config_files", projectID)
@@ -25,7 +25,7 @@ func (c *ConfigFilesService) GetByProject(projectID string) ([]ConfigFile, *Resp
 	return *v, resp, err
 }
 
-// GetBySecret List config files belonging to a secret
+// GetBySecret List config files belonging to a secret.
 // http://semaphoreci.com/docs/api-v2-config-files.html#list-config-files-belonging-to-a-secret
 func (c *ConfigFilesService) GetBySecret(secretID string) ([]ConfigFile, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s/config_files", secretID)
@@ -42,7 +42,7 @@ func (c *ConfigFilesService) GetBySecret(secretID string) ([]ConfigFile, *Respon
 	return *v, resp, err
 }
 
-// Get Get a config file
+// Get Get a config file.
 // http://semaphoreci.com/docs/api-v2-config-files.html#get-a-config-file
 func (c *ConfigFilesService) Get(configFileID string) (*ConfigFile, *Response, error) {
 	urlStr := fmt.Sprintf("config_files/%s", configFileID)

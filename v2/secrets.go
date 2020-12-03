@@ -8,7 +8,7 @@ import (
 // SecretsService http://semaphoreci.com/docs/api-v2-secrets.html
 type SecretsService service
 
-// GetByOrg List secrets in an organization
+// GetByOrg List secrets in an organization.
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-in-an-organization
 func (c *SecretsService) GetByOrg(orgUsername string) ([]Secret, *Response, error) {
 	urlStr := fmt.Sprintf("orgs/%s/secrets", orgUsername)
@@ -25,7 +25,7 @@ func (c *SecretsService) GetByOrg(orgUsername string) ([]Secret, *Response, erro
 	return *v, resp, err
 }
 
-// GetByTeam List secrets in a team
+// GetByTeam List secrets in a team.
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-in-a-team
 func (c *SecretsService) GetByTeam(teamID string) ([]Secret, *Response, error) {
 	urlStr := fmt.Sprintf("teams/%s/secrets", teamID)
@@ -42,7 +42,7 @@ func (c *SecretsService) GetByTeam(teamID string) ([]Secret, *Response, error) {
 	return *v, resp, err
 }
 
-// GetByProject List secrets attached to a project
+// GetByProject List secrets attached to a project.
 // http://semaphoreci.com/docs/api-v2-secrets.html#list-secrets-attached-to-a-project
 func (c *SecretsService) GetByProject(projectID string) ([]Secret, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/secrets", projectID)
@@ -59,7 +59,7 @@ func (c *SecretsService) GetByProject(projectID string) ([]Secret, *Response, er
 	return *v, resp, err
 }
 
-// Get Get a secret
+// Get Get a secret.
 // http://semaphoreci.com/docs/api-v2-secrets.html#get-a-secret
 func (c *SecretsService) Get(secretID string) (*Secret, *Response, error) {
 	urlStr := fmt.Sprintf("secrets/%s", secretID)
