@@ -2,7 +2,6 @@ package v1
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -236,7 +235,6 @@ type Response struct {
 
 func (r *Response) populatePageValues() error {
 	rawPagination := r.Header.Get("Pagination")
-	fmt.Println(rawPagination)
 	if len(rawPagination) > 0 {
 		return json.Unmarshal([]byte(rawPagination), r)
 	}
