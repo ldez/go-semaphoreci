@@ -1,47 +1,90 @@
 run:
-  deadline: 2m
+  timeout: 5m
   skip-files:
     - ^api_v1_test.go
     - ^api_v2_test.go
+  skip-dirs: [ ]
 
 linters-settings:
   govet:
-    check-shadowing: true
+    enable-all: true
+    disable:
+      - fieldalignment
   gocyclo:
-    min-complexity: 12
+    min-complexity: 15
   maligned:
     suggest-new: true
   goconst:
-    min-len: 2
+    min-len: 5
     min-occurrences: 3
   misspell:
     locale: US
+  funlen:
+    lines: -1
+    statements: 40
+  godox:
+    keywords:
+      - FIXME
+  gofumpt:
+    extra-rules: true
+  depguard:
+    list-type: blacklist
+    include-go-root: false
+    packages:
+      - github.com/sirupsen/logrus
+      - github.com/pkg/errors
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+    disabled-checks:
+      - sloppyReassign
+      - rangeValCopy
+      - octalLiteral
+      - paramTypeCombine # already handle by gofumpt.extra-rules
+    settings:
+      hugeParam:
+        sizeThreshold: 100
+  tagliatelle:
+    case:
+      rules:
+        json: snake
 
 linters:
   enable-all: true
   disable:
-    - maligned
+    - maligned # deprecated
+    - interfacer # deprecated
+    - scopelint # deprecated
+    - golint # deprecated
+    - sqlclosecheck # not relevant (SQL)
+    - rowserrcheck # not relevant (SQL)
+    - cyclop # duplicate of gocyclo
     - lll
-    - gas
     - dupl
-    - prealloc
     - wsl
     - nlreturn
-    - godox
     - gomnd
-    - testpackage
-    - paralleltest
+    - goerr113
     - wrapcheck
-    - noctx
+    - exhaustive
     - exhaustivestruct
+    - testpackage
+    - tparallel
+    - paralleltest
+    - prealloc
+    - ifshort
+    - forcetypeassert
+    - noctx
 
 issues:
   exclude-use-default: false
   max-per-linter: 0
-  max-same: 0
-  exclude:
-    - '`\(Client\).newRequest` - `body` always receives `nil`'
+  max-same-issues: 0
+  exclude: []
   exclude-rules:
-    - path: (.+)_test.go
-      linters: ["funlen"]
-#    - path:
+    - path: v1/api.go
+      text: 'yodaStyleExpr: consider to change order in expression to c > 200'
+    - path: v2/api.go
+      text: 'yodaStyleExpr: consider to change order in expression to c > 200'

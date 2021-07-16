@@ -9,7 +9,7 @@ import (
 type DeploysService service
 
 // GetInformation https://semaphoreci.com/docs/servers-and-deploys-api.html#deploy_information
-func (c *DeploysService) GetInformation(projectHashID string, serverID int, number int) (*Deploy, *Response, error) {
+func (c *DeploysService) GetInformation(projectHashID string, serverID, number int) (*Deploy, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v/deploys/%v", projectHashID, serverID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
@@ -25,7 +25,7 @@ func (c *DeploysService) GetInformation(projectHashID string, serverID int, numb
 }
 
 // GetLog https://semaphoreci.com/docs/servers-and-deploys-api.html#deploy_log
-func (c *DeploysService) GetLog(projectHashID string, serverID int, number int) (*DeployLog, error) {
+func (c *DeploysService) GetLog(projectHashID string, serverID, number int) (*DeployLog, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v/deploys/%v/log", projectHashID, serverID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
@@ -41,7 +41,7 @@ func (c *DeploysService) GetLog(projectHashID string, serverID int, number int) 
 }
 
 // Stop https://semaphoreci.com/docs/servers-and-deploys-api.html#stop
-func (c *DeploysService) Stop(projectHashID string, serverID int, number int) (*Deploy, *Response, error) {
+func (c *DeploysService) Stop(projectHashID string, serverID, number int) (*Deploy, *Response, error) {
 	urlStr := fmt.Sprintf("projects/%s/servers/%v/deploys/%v/stop", projectHashID, serverID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)

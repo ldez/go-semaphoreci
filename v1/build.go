@@ -10,7 +10,7 @@ import (
 type BuildsService service
 
 // GetInformation https://semaphoreci.com/docs/branches-and-builds-api.html#build_information
-func (c *BuildsService) GetInformation(projectHashID string, branchID int, number int) (*BuildInformation, error) {
+func (c *BuildsService) GetInformation(projectHashID string, branchID, number int) (*BuildInformation, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v/builds/%v", projectHashID, branchID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
@@ -26,7 +26,7 @@ func (c *BuildsService) GetInformation(projectHashID string, branchID int, numbe
 }
 
 // GetLog https://semaphoreci.com/docs/branches-and-builds-api.html#build_log
-func (c *BuildsService) GetLog(projectHashID string, branchID int, number int) (*BuildLog, error) {
+func (c *BuildsService) GetLog(projectHashID string, branchID, number int) (*BuildLog, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v/builds/%v/log", projectHashID, branchID, number)
 
 	req, err := c.client.NewRequest(http.MethodGet, urlStr, nil)
@@ -81,7 +81,7 @@ func (c *BuildsService) Launch(projectHashID string, branchID int, commitSHA str
 }
 
 // Stop https://semaphoreci.com/docs/branches-and-builds-api.html#stop
-func (c *BuildsService) Stop(projectHashID string, branchID int, number int) (*BuildInformation, error) {
+func (c *BuildsService) Stop(projectHashID string, branchID, number int) (*BuildInformation, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v/builds/%v/stop", projectHashID, branchID, number)
 
 	req, err := c.client.NewRequest(http.MethodPost, urlStr, nil)
@@ -97,7 +97,7 @@ func (c *BuildsService) Stop(projectHashID string, branchID int, number int) (*B
 }
 
 // DeployFromBuild https://semaphoreci.com/docs/branches-and-builds-api.html#deploy
-func (c *BuildsService) DeployFromBuild(projectHashID string, branchID int, number int, serverID int) (*ServerStatus, error) {
+func (c *BuildsService) DeployFromBuild(projectHashID string, branchID, number, serverID int) (*ServerStatus, error) {
 	urlStr := fmt.Sprintf("projects/%s/%v/builds/%v/deploy/%v", projectHashID, branchID, number, serverID)
 
 	req, err := c.client.NewRequest(http.MethodPost, urlStr, nil)
