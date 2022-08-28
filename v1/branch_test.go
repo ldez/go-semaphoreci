@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestBranchesService_GetByProject(t *testing.T) {
 	mux.HandleFunc("/projects/p/branches", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/BranchesService_GetByProject.json")
+		content, err := os.ReadFile("fixtures/BranchesService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -58,7 +58,7 @@ func TestBranchesService_GetStatus(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/status", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/BranchesService_GetStatus.json")
+		content, err := os.ReadFile("fixtures/BranchesService_GetStatus.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -104,7 +104,7 @@ func TestBranchesService_GetHistory(t *testing.T) {
 	mux.HandleFunc("/projects/p/666", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/BranchesService_GetHistory.json")
+		content, err := os.ReadFile("fixtures/BranchesService_GetHistory.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

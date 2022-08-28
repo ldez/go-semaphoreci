@@ -9,7 +9,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -80,7 +79,7 @@ func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 	}
 
 	if v != nil {
-		raw, err := ioutil.ReadAll(resp.Body)
+		raw, err := io.ReadAll(resp.Body)
 		if err != nil {
 			return nil, &ErrorResponse{
 				Response: resp,
@@ -106,7 +105,7 @@ func checkResponse(resp *http.Response) error {
 	}
 
 	errorResponse := &ErrorResponse{Response: resp}
-	data, err := ioutil.ReadAll(resp.Body)
+	data, err := io.ReadAll(resp.Body)
 	if err == nil && data != nil {
 		errJSON := json.Unmarshal(data, errorResponse)
 		if errJSON != nil {

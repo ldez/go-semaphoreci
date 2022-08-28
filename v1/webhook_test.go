@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestWebHooksService_GetByProject(t *testing.T) {
 	mux.HandleFunc("/projects/p/hooks", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/WebHooksService_GetByProject.json")
+		content, err := os.ReadFile("fixtures/WebHooksService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -53,7 +53,7 @@ func TestWebHooksService_Create(t *testing.T) {
 	mux.HandleFunc("/projects/p/hooks", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPost)
 
-		content, err := ioutil.ReadFile("fixtures/WebHooksService_Create.json")
+		content, err := os.ReadFile("fixtures/WebHooksService_Create.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -87,7 +87,7 @@ func TestWebHooksService_Update(t *testing.T) {
 	mux.HandleFunc("/projects/p/hooks/266", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPut)
 
-		content, err := ioutil.ReadFile("fixtures/WebHooksService_Update.json")
+		content, err := os.ReadFile("fixtures/WebHooksService_Update.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

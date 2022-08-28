@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestDeploysService_GetInformation(t *testing.T) {
 	mux.HandleFunc("/projects/p/servers/666/deploys/123", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/DeploysService_GetInformation.json")
+		content, err := os.ReadFile("fixtures/DeploysService_GetInformation.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -64,7 +64,7 @@ func TestDeploysService_GetLog(t *testing.T) {
 	mux.HandleFunc("/projects/p/servers/666/deploys/123/log", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/DeploysService_GetLog.json")
+		content, err := os.ReadFile("fixtures/DeploysService_GetLog.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -116,7 +116,7 @@ func TestDeploysService_Stop(t *testing.T) {
 	mux.HandleFunc("/projects/p/servers/666/deploys/123/stop", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/DeploysService_Stop.json")
+		content, err := os.ReadFile("fixtures/DeploysService_Stop.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

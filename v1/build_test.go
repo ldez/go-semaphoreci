@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestBuildsService_GetInformation(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/builds/123", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_GetInformation.json")
+		content, err := os.ReadFile("fixtures/BuildsService_GetInformation.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -63,7 +63,7 @@ func TestBuildsService_GetLog(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/builds/123/log", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_GetLog.json")
+		content, err := os.ReadFile("fixtures/BuildsService_GetLog.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -128,7 +128,7 @@ func TestBuildsService_RebuildLastRevision(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/build", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPost)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_RebuildLastRevision.json")
+		content, err := os.ReadFile("fixtures/BuildsService_RebuildLastRevision.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -185,7 +185,7 @@ func TestBuildsService_Launch(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/build", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPost)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_Launch.json")
+		content, err := os.ReadFile("fixtures/BuildsService_Launch.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -234,7 +234,7 @@ func TestBuildsService_Stop(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/builds/123/stop", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPost)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_Stop.json")
+		content, err := os.ReadFile("fixtures/BuildsService_Stop.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -283,7 +283,7 @@ func TestBuildsService_DeployFromBuild(t *testing.T) {
 	mux.HandleFunc("/projects/p/666/builds/123/deploy/789", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodPost)
 
-		content, err := ioutil.ReadFile("fixtures/BuildsService_DeployFromBuild.json")
+		content, err := os.ReadFile("fixtures/BuildsService_DeployFromBuild.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

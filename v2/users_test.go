@@ -1,8 +1,8 @@
 package v2
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestUsersService_GetByOrg(t *testing.T) {
 	mux.HandleFunc("/orgs/u/users", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/UsersService_GetByOrg.json")
+		content, err := os.ReadFile("fixtures/UsersService_GetByOrg.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -48,7 +48,7 @@ func TestUsersService_GetByTeam(t *testing.T) {
 	mux.HandleFunc("/teams/t/users", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/UsersService_GetByTeam.json")
+		content, err := os.ReadFile("fixtures/UsersService_GetByTeam.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -81,7 +81,7 @@ func TestUsersService_GetByProject(t *testing.T) {
 	mux.HandleFunc("/projects/p/users", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/UsersService_GetByProject.json")
+		content, err := os.ReadFile("fixtures/UsersService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

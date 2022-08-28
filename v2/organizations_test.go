@@ -1,8 +1,8 @@
 package v2
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestOrganizationsService_GetYours(t *testing.T) {
 	mux.HandleFunc("/orgs", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/OrganizationsService_GetYours.json")
+		content, err := os.ReadFile("fixtures/OrganizationsService_GetYours.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -53,7 +53,7 @@ func TestOrganizationsService_Get(t *testing.T) {
 	mux.HandleFunc("/orgs/u", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/OrganizationsService_Get.json")
+		content, err := os.ReadFile("fixtures/OrganizationsService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

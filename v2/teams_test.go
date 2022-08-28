@@ -1,8 +1,8 @@
 package v2
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestTeamsService_GetByOrg(t *testing.T) {
 	mux.HandleFunc("/orgs/u/teams", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/TeamsService_GetByOrg.json")
+		content, err := os.ReadFile("fixtures/TeamsService_GetByOrg.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -53,7 +53,7 @@ func TestTeamsService_GetByProject(t *testing.T) {
 	mux.HandleFunc("/projects/p/teams", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/TeamsService_GetByProject.json")
+		content, err := os.ReadFile("fixtures/TeamsService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -91,7 +91,7 @@ func TestTeamsService_GetBySecret(t *testing.T) {
 	mux.HandleFunc("/secrets/s/teams", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/TeamsService_GetBySecret.json")
+		content, err := os.ReadFile("fixtures/TeamsService_GetBySecret.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -129,7 +129,7 @@ func TestTeamsService_Get(t *testing.T) {
 	mux.HandleFunc("/teams/t", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/TeamsService_Get.json")
+		content, err := os.ReadFile("fixtures/TeamsService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

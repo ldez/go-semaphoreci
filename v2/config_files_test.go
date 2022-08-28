@@ -1,8 +1,8 @@
 package v2
 
 import (
-	"io/ioutil"
 	"net/http"
+	"os"
 	"testing"
 
 	"gotest.tools/v3/assert"
@@ -15,7 +15,7 @@ func TestConfigFilesService_GetByProject(t *testing.T) {
 	mux.HandleFunc("/projects/p/config_files", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_GetByProject.json")
+		content, err := os.ReadFile("fixtures/ConfigFilesService_GetByProject.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -50,7 +50,7 @@ func TestConfigFilesService_GetBySecret(t *testing.T) {
 	mux.HandleFunc("/secrets/s/config_files", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_GetBySecret.json")
+		content, err := os.ReadFile("fixtures/ConfigFilesService_GetBySecret.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -85,7 +85,7 @@ func TestConfigFilesService_Get(t *testing.T) {
 	mux.HandleFunc("/config_files/c", func(w http.ResponseWriter, req *http.Request) {
 		assert.Equal(t, req.Method, http.MethodGet)
 
-		content, err := ioutil.ReadFile("fixtures/ConfigFilesService_Get.json")
+		content, err := os.ReadFile("fixtures/ConfigFilesService_Get.json")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
